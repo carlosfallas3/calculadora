@@ -1,0 +1,36 @@
+﻿<html>
+<head>
+<title>Calculadora</title>
+<script src="./prototype.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+	function recibirAjaxActualizar(){
+
+		var val1 = document.getElementById("valor1").value;
+		var val2 = document.getElementById("valor2").value;
+		var op = document.getElementById("operacion").value;	
+		new Ajax.Request("../calculadora.php?valor1=" + val1 + "&valor2=" + val2 + "&operacion=" + op,{
+		  onSuccess: function(response) {
+				document.getElementById("contenidoajax").innerHTML = response.responseText;	
+				}	  
+		});
+	}
+</script>
+</head>
+<body>
+<form>
+Valor 1: <input type="number" id="valor1"></input><br/>
+Valor 2: <input type="number" id="valor2"></input><br/>
+Operación: <select id="operacion">
+<option value="sumar">Sumar</option>
+<option value="restar">Restar</option>
+<option value="multiplicar">Multiplicar</option>
+<option value="dividir">Dividir</option>
+</select><br/>
+<input type="button" value="Calcular" onclick="recibirAjaxActualizar()"></input>
+</form>
+<hr/>
+<div id="contenidoajax"></div>
+</body>
+</html>
